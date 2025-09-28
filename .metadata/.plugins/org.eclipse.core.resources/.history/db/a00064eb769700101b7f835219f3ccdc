@@ -1,0 +1,42 @@
+<!-- fragments/header.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <body>
+    <header th:fragment ="u-header">
+        <nav class="navbar navbar-expand-lg bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="/index">
+                    <img src="images/logo.png" alt="Smart Programming Logo" width="60" />
+                    <span class="h3 text-white">Prat's Coding</span>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link text-white" aria-current="page" href="/index">Home</a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link text-white" aria-current="page" href="/myCourses">My Courses</a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav mb-2 mb-lg-0 ms-5">
+                        <li class="nav-item">
+                            <a class="nav-link text-white" aria-current="page" href="userProfile">
+                                <i class="bi bi-person-circle" style="font-size: 2rem;"></i>
+                                Hello, <span th:text="${sessionUser.name}"></span>
+                            </a>
+                        </li>
+                    </ul>
+                    <a href="/login" class="btn btn-danger ms-2"> Logout </a>
+                </div>
+            </div>
+        </nav>
+    </header>
+  </body>
+</html>

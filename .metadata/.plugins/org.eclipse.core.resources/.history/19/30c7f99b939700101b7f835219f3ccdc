@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>About Us</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr"
+	crossorigin="anonymous" />
+
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+<link rel="stylesheet" th:href="@{/css/style.css}">
+
+</head>
+<body>
+	<div th:replace="~{fragments/user-header :: u-header}"></div>
+	<h2>About Us</h2>
+
+	<div class="main-content">
+		<p>At Prat's coding we believe that learning should be
+			accessible, flexible, and impactful for everyone, everywhere. Founded
+			with the vision of empowering learners to unlock their potential, we
+			are an online training institute committed to bridging the gap
+			between traditional education and the rapidly evolving demands of the
+			modern world. Our platform is designed to provide high-quality
+			training programs across a wide range of domains including
+			technology, business, communication, and professional development.
+			With the guidance of experienced instructors and industry experts, we
+			ensure that our learners not only gain theoretical knowledge but also
+			practical skills that make them job-ready and future-proof. What sets
+			us apart is our learner-centric approach—every course is carefully
+			crafted with interactive modules, real-world case studies, hands-on
+			projects, and continuous assessments to enhance understanding and
+			boost confidence. We recognize that every learner’s journey is
+			unique, so our flexible learning model allows you to study at your
+			own pace, from anywhere, at any time, without compromising on
+			quality. Over the years, we have helped countless students, fresh
+			graduates, and working professionals achieve their academic and
+			career goals by providing them with a strong foundation and advanced
+			skill sets. Our commitment goes beyond just delivering courses—we aim
+			to build a vibrant learning community where learners can connect,
+			collaborate, and grow together. From providing personalized
+			mentorship and career guidance to offering placement support and
+			industry-recognized certifications, we ensure that our learners are
+			equipped to thrive in today’s competitive environment. At [Institute
+			Name], we combine innovation in education with the power of
+			technology to create an immersive and transformative learning
+			experience. Whether you are seeking to upskill, reskill, or explore a
+			new career path, our institute is your trusted partner in lifelong
+			learning. Join us today and take the first step towards building the
+			future you deserve—because at [Institute Name], your growth is our
+			mission, and your success is our pride.</p>
+	</div>
+</body>
+</html>

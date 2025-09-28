@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Add Course Page</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr"
+	crossorigin="anonymous" />
+
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" />
+
+<link rel="stylesheet" th:href="@{/css/style.css}">
+
+</head>
+
+<body>
+	<!--Side navbar starts-->
+	<div th:replace="~{fragments/admin-sidebar :: frag-admin-sidebar}"></div>
+	<!--Side navbar ends -->
+
+	<div class="main-content">
+		<h2 class="text-center mb-3">Course Management</h2>
+		<p class="text-center text-muted">Add new course here</p>
+
+		<section class="mt-5">
+			<div class="row justify-content-center">
+				<h3 class="text-center mb-4">Add Course</h3>
+				<div class="card shadow p-5" style="width: 40%">
+
+
+					<!-- Success message -->
+					<div th:if="${successMsg}" class="alert alert-success mb-3"
+						role="alert">
+						<span th:text="${successMsg}"></span>
+					</div>
+					
+					<!-- Error Message -->
+					<div th:if="${errorMsg}" class="alert alert-danger mb-3"
+						role="alert">
+						<span th:text="${errorMsg}"></span>
+					</div>
+
+
+
+					<form id="courseForm" th:action="@{/addCourseForm}" th:object="${course}" method="post"
+						enctype="multipart/form-data">
+
+						<!-- Course Name -->
+						<div class="mb-3">
+							<label class="form-label fw-semibold">Course Name</label> 
+							<input type="text" class="form-control" name="courseName" required />
+							<div class="text-danger small"></div>
+						</div>
+
+						<!-- Description -->
+						<div class="mb-3">
+							<label class="form-label fw-semibold">Course Description</label>
+							<textarea class="form-control" name="description" required></textarea>
+							<div class="text-danger small"></div>
+						</div>
+
+						<!-- Original Price -->
+						<div class="mb-3">
+							<label class="form-label fw-semibold"> Course Original Price</label> 
+							<input type="text" class="form-control" name="originalPrice" required />
+							<div class="text-danger small"></div>
+						</div>
+
+						<!-- Discounted Price -->
+						<div class="mb-3">
+							<label class="form-label fw-semibold">Course Discounted Price</label> 
+							<input type="text" class="form-control" name="discountedPrice" required/> 
+							<div class="text-danger small"></div>
+						</div>
+
+						<!-- Updated On -->
+						<div class="mb-3">
+							<label class="form-label fw-semibold">Course Updated On</label> 
+							<input type="text" class="form-control" name="updatedOn" required />
+							<div class="text-danger small"></div>
+						</div>
+
+						<!-- Image Upload -->
+						<div class="mb-3">
+							<label class="form-label fw-semibold">Course Image</label>
+							<input type="file" class="form-control" name="courseImg" />
+							<div class="text-danger small"></div>
+						</div>
+
+						<!-- Submit Button -->
+						<div class="d-grid">
+							<button type="submit" class="btn btn-primary btn-lg">Add Course</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</section>
+	</div>
+
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
+		crossorigin="anonymous"></script>
+<script>
+		document.getElementById("courseForm").addEventListener("submit", function(e) {
+				
+			let isValid = true;
+			
+			//Clear old errors
+			document.querySelectorAll(".text-danger").forEach(el => el.textContent = "");
+			
+			//Course Name validation-check
+			
+			const courseName = this.courseName.value.trim();
+			
+			if(courseName.length < 3) {
+					
+				setError(this.courseName, "Course name must be at least 3 characters.");
+				isValid = false;
+			}
+			
+			//Description
+			const description = this.description.value.trim();
+			if(description.length < 10) {
+				setError(this.description, "Description must be at least 10 characters long");
+				isValid = false;
+			}
+			
+			//Original Price validation-check
+			const originalPrice = this.originalPrice.value.trim();
+		 	
+			if(parseFloat(originalPrice) <= 0) {
+				setError(this.originalPrice, "Price should be a valid price and greater than 0");
+				isValid = false;
+			}
+			
+			//Discounted Price validations check
+			const discountedPrice = this.discountedPrice.value.trim();
+		    if(parseFloat(discountedPrice) > parseFloat(originalPrice)) {
+				setError(this.discountedPrice, "Discounted Price cannot exceed original Price");
+				isValid = false;
+			}
+			
+			//Updates On Validation-check
+			
+			const updatedOn = this.updatedOn.value.trim();
+			const updatedOnRegex = /^\d+\s+(day|days|week|weeks|month|months|year|years)\s+ago$/i;
+			
+			if (!updatedOnRegex.test(updatedOn)) {
+			    setError(this.updatedOn, "Enter a valid format (e.g., '1 week ago', '10 months ago', '2 days ago')");
+			    isValid = false;
+			}
+			
+			///Image upload
+			const file = this.courseImg.files[0];
+			if(!file) {
+				setError(this.courseImg, "Please upload a course image");
+				isValid = false;
+			}else if(!file.type.startsWith("image/")) {
+				setError(this.courseImg, "Only image files are allowed");
+				isValid = false;
+			}
+			
+			if(!isValid) e.preventDefault();
+		});
+		
+		function setError(input, message){
+			input.nextElementSibling.textContent = message;
+		}
+</script>
+</body>
+</html>

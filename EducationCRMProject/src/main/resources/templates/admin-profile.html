@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Admin Profile Page</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr"
+	crossorigin="anonymous">
+
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+<link rel="stylesheet" th:href="@{/css/style.css}">
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0"></script>
+
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+</head>
+
+<body>
+	<!--Side navbar starts-->
+	<div th:replace="~{fragments/admin-sidebar :: frag-admin-sidebar}"></div>
+	<!--Side navbar ends -->
+
+	<!-- Admin panel starts -->
+	<div class="main-content">
+		<h2>Admin Dashboard</h2>
+		<p>Visualize employee, course, and user data with interactive
+			charts and graphs.</p>
+
+		<section class="container py-5">
+			<div class="row justify-content-center align-items-stretch">
+
+				<div class="col-lg-6 mb-3">
+					<div class="card shadow p-3 h-100">
+						<h3 class="text-center mb-4">Today's Sales Graph</h3>
+						<div id="myPlot" style="height: 400px;"></div>
+					</div>
+				</div>
+
+				<div class="col-lg-6 mb-3">
+					<div class="card shadow p-3 h-100">
+						<h3 class="text-center mb-4">Courses Sold Per Day Graph</h3>
+						<canvas id="myPieChart" style="height: 400px;"></canvas>
+					</div>
+				</div>
+
+			</div>
+		</section>
+
+		<section class="container py-5">
+			<div class="row justify-content-center">
+
+				<div class="col-lg-12">
+					<div class="card shadow p-3">
+						<h3 class="text-center mb-4">Courses Sold Per Day Graph</h3>
+						<canvas class="mt-3" id="myLineChart"></canvas>
+					</div>
+				</div>
+			</div>
+		</section>
+
+
+
+
+
+	</div>
+	<!-- Admin panel ends -->
+
+
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
+		crossorigin="anonymous"></script>
+
+	<script th:inline="javascript">
+    
+	function graphOne() {
+		
+		  const xArray = /*[[${date11}]]*/ [];
+		  const yArray = /*[[${totalAmount11}]]*/ [];
+
+		  const data = [{
+		    x: xArray,
+		    y: yArray,
+		    type: "bar",
+		    orientation: "v",
+		    marker: { color: "rgba(0,0,255,0.6)" }
+		  }];
+
+		  const layout = {
+		    title: "Courses Sold Each Day",
+		    xaxis: { title: "Date" },
+		    yaxis: { title: "Total Sales Amount (₹)" 
+				}
+		  };
+
+		  const config = { displayModeBar: false };
+
+		  Plotly.newPlot("myPlot", data, layout, config);
+	}
+	graphOne();
+    
+    
+    
+    function graphTwo() {
+    	const xValues = /*[[${courseName1}]]*/ [];
+        const yValues = /*[[${courseCount1}]]*/ [];
+        
+        function getRandomColor() {
+        	const letters = "0123456789ABCDEF";
+        	let colorCode = "#";
+        	for(var i = 0; i < 6; i++) {
+				const randomIdx = Math.floor(Math.random()*16); 
+				const randomCharacter = letters[randomIdx];
+				colorCode += randomCharacter;
+			}
+        	return colorCode;
+        }
+        
+        const barColors = xValues.map(() => getRandomColor());
+
+        const ctx = document.getElementById('myPieChart');
+
+        new Chart(ctx, {
+          type: "pie",
+          data: {
+            labels: xValues,
+            datasets: [{
+              label: "Courses Sold",
+              data: yValues,
+              backgroundColor: barColors
+            }]
+          },
+          options: {
+            responsive: true,
+            plugins: {
+              legend: {
+                display: true,
+                position: "top"
+              },
+              title: {
+                display: true,
+                font: {
+                  size: 16
+                }
+              }
+            }
+          }
+        });
+    }
+    graphTwo();
+    
+    
+    function graphThree() {
+    	const xValues = /*[[${dates1}]]*/ [];
+	    const yValues = /*[[${counts1}]]*/ [];
+	    
+	    console.log("xValues:", xValues);
+	    console.log("yValues:", yValues);
+
+	    var maxYValues = Math.max(...yValues) + 2;
+	    const ctx = document.getElementById('myLineChart');
+
+	    new Chart(ctx, {
+	        type: "line",
+	        data: {
+	            labels: xValues,
+	            datasets: [{
+	                label: "Courses Sold",
+	                fill: false,
+	                tension: 0.3,
+	                backgroundColor: "rgba(0,0,255,1.0)",
+	                borderColor: "rgba(0,0,255,0.1)",
+	                data: yValues
+	            }]
+	        },
+	        options: {
+	            responsive: true,
+	            plugins: {
+	                legend: { display: false },
+	                title: {
+	                    display: true,
+	                    text: "Courses Sold Per Day",
+	                    font: { size: 16 }
+	                }
+	            },
+	            scales: {
+	                y: {
+	                    beginAtZero: true,
+	                    min: 0,
+	                    max: maxYValues,
+	                    title: {
+                    		display: true,
+                    		text: "Number of Course"
+						}
+	                },
+	                x: {
+	                    title: {
+	                        display: true,
+	                        text: "Date"
+	                    }
+	                }
+	            }
+	        }
+	    });
+    }
+    graphThree();
+   
+</script>
+
+</body>
+
+</html>

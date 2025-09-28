@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Edit Course Page</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr"
+	crossorigin="anonymous" />
+
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" />
+	
+<link rel="stylesheet" th:href="@{/css/style.css}">
+
+</head>
+
+<body>
+	<!--Side navbar starts-->
+	<div th:replace="~{fragments/admin-sidebar :: frag-admin-sidebar}"></div>
+	<!--Side navbar ends -->
+
+	<div class="main-content">
+		<h2 class="text-center mb-3">Course Management</h2>
+		<p class="text-center text-muted">Edit Course here...</p>
+
+		<section class="mt-5">
+			<div class="row justify-content-center">
+				<h3 class="text-center mb-4">Add Course</h3>
+				
+				<div class="card shadow p-5" style="width: 50%">
+				
+					<form th:action="@{/updateCourseDetailsForm}"
+					     th:object="${course}"
+						 method="post" enctype="multipart/form-data">
+
+						<!-- Course Name -->
+						<div class="mb-3">
+							<label class="form-label fw-semibold">Course Name</label> <input
+								type="text" class="form-control" name="courseName" th:value="${course.courseName}" readonly="readonly"/>
+							
+						</div>
+						
+						<!-- Description -->
+						<div class="mb-3">
+							<label class="form-label fw-semibold">Course Description</label>
+							<textarea class="form-control" name="description" th:text="${course.description}"  required></textarea>
+							
+						</div>
+
+						<!-- Original Price -->
+						<div class="mb-3">
+							<label class="form-label fw-semibold"> Course Original Price</label> 
+							<input type="text" class="form-control" name="originalPrice" th:value="${course.originalPrice}" required />
+							
+						</div>
+
+						<!-- Discounted Price -->
+						<div class="mb-3">
+							<label class="form-label fw-semibold">Course Discounted Price</label> 
+							<input type="text" class="form-control" name="discountedPrice" th:value="${course.discountedPrice}" required/> 
+							
+						</div>
+
+						<!-- Updated On -->
+						<div class="mb-3">
+							<label class="form-label fw-semibold">Course Updated On</label> 
+							<input type="text" class="form-control" name="updatedOn" th:value="${course.updatedOn}" required />
+							
+						</div>
+
+						<!-- Image Upload -->
+						<div class="mb-3">
+							<label class="form-label fw-semibold">Course Image</label>
+							<div class="d-flex align-items-center">
+								<img alt="Course Image" th:src="@{${course.imageURL}}" width="150" class="me-3">
+								<input type="file" class="form-control" name="courseImg"/>
+							</div>
+							
+						</div>
+						
+						<!-- Submit Button -->
+						<div class="d-grid">
+							<button type="submit" class="btn btn-primary btn-lg">Edit Course
+								</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</section>
+	</div>
+
+
+</body>
+</html>

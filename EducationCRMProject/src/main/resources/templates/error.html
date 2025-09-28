@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Error Page</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr"
+	crossorigin="anonymous" />
+<link rel="stylesheet" th:href="@{/css/style.css}">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+</head>
+<body>
+	<main>
+		<section
+			class="py-3 py-md-5 min-vh-100 d-flex justify-content-center align-items-center">
+			<div class="container">
+				<div class="row">
+					<div class="col-12">
+						<div class="text-center">
+							<h2
+								class="d-flex justify-content-center align-items-center gap-2 md-">
+								 <i class="bi bi-exclamation-circle-fill text-danger display-4"></i>
+							</h2>
+							<h3 class="h2 mb-2">Oops! Error occurred....</h3>
+							<p th:if="${errorMsg}" class="mb-5">
+							<span th:text="${errorMsg}"></span> 
+							</p>
+							<a href="/index"
+								class="btn bsb-btn-5xl btn-dark rounded-pill px-5 fs-6 m-0"
+								role="button">Back to home</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+	</main>
+
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
+		crossorigin="anonymous"></script>
+		
+</body>
+</html>

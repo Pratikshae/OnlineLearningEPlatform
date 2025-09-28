@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>PC registration</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr"
+	crossorigin="anonymous" />
+</head>
+<body>
+
+	<!-- Header starts-->
+	<!-- importing header content from fragments/header.html file -->
+	<div th:replace="~{fragments/header :: header}"></div>
+
+	<!-- Header ends-->
+
+	<!-- Main Content starts-->
+	<main class="container-fluid" style="min-height: 550px;">
+		<!-- Content -->
+		<section class="container py-4 bg-light">
+			<h3 class="text-center mb-4">Register Here</h3>
+
+
+			<div class="row justify-content-center text-align-center">
+
+				<div class="col-lg-4 col-md-3">
+					<form action="regForm" method="post"
+						onsubmit="return validateForm()" th:object="${user}">
+						<div class="card p-5 shadow p-5">
+
+							<!--Register Card starts -->
+
+							<div th:if="${successMsg}" class="alert alert-success mb-3"
+								role="alert">
+								<!-- print success message here -->
+								<span th:text="${successMsg}"></span>
+							</div>
+
+							<div class="mb-3">
+								<label for="exampleInputEmail1" class="form-label">Name</label>
+								<input type="text" class="form-control" name="name" th:field="*{name}" required />
+								<div class="invalid-feedback"></div>
+								<div class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+							</div>
+
+							<div class="mb-3">
+								<label for="exampleInputEmail1" class="form-label">Email
+									Id </label> <input type="email" class="form-control" name="email"
+									th:field="*{email}" required />
+								<div class="invalid-feedback"></div>
+								<div class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+							</div>
+
+							<div class="mb-3">
+								<label for="exampleInputPassword1" class="form-label">Password</label>
+								<input type="password" class="form-control" name="password"
+									th:field="*{password}" required />
+								<div class="invalid-feedback"></div>
+								<div class="text-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+							</div>
+
+							<div class="mb-3">
+								<label for="exampleInputPassword1" class="form-label">Repeat
+									your Password </label> <input type="password" class="form-control"
+									name="repeatPassword" th:field="*{repeatPassword}" required />
+								<div class="invalid-feedback"></div>
+								<div class="text-danger" th:if="${#fields.hasErrors('repeatPassword')}" th:errors="*{repeatPassword}"></div>
+							</div>
+
+							<div class="mb-3">
+								<label for="exampleInputEmail1" class="form-label">Phone
+									Number</label> <input type="text" class="form-control" name="phoneno"
+									th:field="*{phoneno}" required />
+								<div class="invalid-feedback"></div>
+								<div class="text-danger" th:if="${#fields.hasErrors('phoneno')}" th:errors="*{phoneno}"></div>
+							</div>
+
+							<div class="mb-3">
+								<label for="exampleInputEmail1" class="form-label">City</label>
+								<input type="text" class="form-control" name="city" th:field="*{city}" required />
+								<div class="invalid-feedback"></div>
+								<div class="text-danger" th:if="${#fields.hasErrors('city')}" th:errors="*{city}"></div>
+							</div>
+
+							<button type="submit" class="btn btn-primary">Register</button>
+						</div>
+					</form>
+
+					<!--Register Card end s -->
+				</div>
+			</div>
+		</section>
+	</main>
+	<!-- Main content ends-->
+
+	<!--Footer starts-->
+	<!-- importing footer content from fragments/footer.html -->
+	<div th:replace="~{fragments/footer :: footer}"></div>
+	<!--Footer ends-->
+	<script type="text/javascript">
+	
+		function validateForm() {
+			let form = document.forms[0];
+			let valid = true;
+
+			//collect field data
+			let name = form["name"];
+			let email = form["email"];
+			let password = form["password"];
+			let repeatPassword = form["repeatPassword"];
+			let phone = form["phoneno"];
+			let city = form["city"];
+
+			//patterns
+
+			let namePattern = /^[A-Z][a-zA-Z]+ [A-Z][a-zA-Z]+$/;
+			let emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+			let passwordPattern = /^.{6,}$/;
+			let phonePattern = /^[0-9]{10}$/;
+			let cityPattern = /^[A-Za-z\s]{3,}$/;
+
+			//Helper: show error
+
+			function showError(input, message) {
+				input.classList.add("is-invalid");
+				input.nextElementSibling.textContent = message;
+				valid = false;
+			}
+
+			//Helper: clear error
+			function clearError(input) {
+				input.classList.remove("is-invalid");
+				input.nextElementSibling.textContent = "";
+			}
+
+			//Reset old errors
+			[ name, email, password, repeatPassword, phone, city ]
+					.forEach(clearError);
+
+			//Validations
+			if (!namePattern.test(name.value.trim())) {
+				showError(name, "Enter Firstname and Surname(e.g, John Doe).");
+			}
+
+			if (!emailPattern.test(email.value.trim())) {
+				showError(email, "Enter a valid email.");
+			}
+			if (!passwordPattern.test(password.value.trim())) {
+				showError(password, "Password must be at least 6 characters.");
+			}
+			if (repeatPassword.value.trim() !== password.value.trim()) {
+				showError(repeatPassword, "Passwords do not match.");
+			}
+			if (!phonePattern.test(phone.value.trim())) {
+				showError(phone, "Enter a valid 10-digit phone number.");
+			}
+			if (!cityPattern.test(city.value.trim())) {
+				showError(city, "Enter a valid city name.");
+			}
+			
+			return valid;
+		}
+	</script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
+		crossorigin="anonymous"></script>
+</body>
+</html>

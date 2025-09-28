@@ -1,0 +1,74 @@
+package in.na.main.controllers;
+
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import in.na.main.entities.Feedback;
+import in.na.main.repositories.FeedbackRepository;
+import in.na.main.services.FeedbackService;
+
+@Controller
+@SessionAttributes("sessionUser")
+public class FeedbackController {
+	// handler methods
+	@Autowired
+	private FeedbackService feedbackService;
+	
+	@Autowired
+	private FeedbackRepository feedbackRepository;
+
+	@GetMapping("/provideFeedback")
+	public String openProvidedFeedbackPage(Model model) {
+
+		model.addAttribute("feedback", new Feedback());
+		return "provide-feedback";
+	}
+
+	@PostMapping("/feedbackForm")
+	public String handleFeedbackForm(@ModelAttribute("feedback") Feedback feedback, Model model) {
+
+		feedback.setDateOfFeedback(LocalDate.now().toString());
+		feedback.setTimeOfFeedback(LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss")));
+		feedback.setReadStatus("unread");
+
+		try {
+
+			feedbackService.sendFeedback(feedback);
+			model.addAttribute("successMsg", "Feedback sent successfully, thank you!!!");
+		} catch (Exception e) {
+			e.printStackTrace();
+			model.addAttribute("errorMsg", "Feedback not snet due to some error, please try again later.");
+			;
+		}
+		return "provide-feedback";
+	}
+
+	@PostMapping("/updateFeedbackStatus")
+	public String updateFeedbackStatus(@RequestParam("id") Long id, @RequestParam("status") String status,
+			RedirectAttributes redirectAttributes) {
+		
+		Feedback feedback = feedbackRepository.findById(id).orElseThrow(() -> new RuntimeException("Feedback not found with id " + id));
+		
+		
+		feedback.setReadStatus(status);
+		feedbackRepository.save(feedback);
+		
+		
+		redirectAttributes.addFlashAttribute("successMsg", "Feedback status updated successfully!");
+		
+		return "redirect:/adminFeedback";
+
+	}
+
+}

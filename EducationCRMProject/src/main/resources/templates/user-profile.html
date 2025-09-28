@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>PC User Profile page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous" />
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+</head>
+
+<body>
+    
+    <!-- header starts -->
+    <div th:replace="~{fragments/user-header :: u-header}"></div>
+    <!-- header ends -->
+    <!-- Main Content starts-->
+    <main class="container-fluid" style="min-height: 600px;">
+        <section class="container py-5">
+            <!-- Profile designing part -->
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="card shadow"  style="width: 18rem;">
+                        <div class="card-body">
+                            <div class="text-center">
+                                <i class="bi bi-person-circle" style="font-size: 8rem;"></i>
+                                <h3 th:text="${sessionUser.name}"></h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-8">
+                    <div class="card shadow" >
+                        <div class="card-body">
+                            <div class="text-center">
+                                <h4 class="mb-4">Profile Details</h4>
+
+                                <table class="table table-hover table-striped table-bordered">
+                                    
+                                    <tbody>
+                                        <tr>
+                                            <td>Name</td>
+                                            <td th:text="${sessionUser.name}"></td>
+                                        </tr>
+                                        
+                                        <tr>
+                                            <td>Email</td>
+                                            <td th:text="${sessionUser.email}"></td>
+                                        </tr>
+                                        
+                                        <tr>
+                                            <td>Phone no</td>
+                                            <td th:text="${sessionUser.phoneno}"></td>
+                                        </tr>
+                                        
+                                        <tr>
+                                            <td>City</td>
+                                            <td th:text="${sessionUser.city}"></td>
+                                        </tr>
+                                        
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+    <!-- Main content ends-->
+
+    <!--Footer starts-->
+    <!-- importing footer content from fragments/footer.html -->
+    <div th:replace="~{fragments/footer :: footer}"></div>
+    <!--Footer ends-->
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

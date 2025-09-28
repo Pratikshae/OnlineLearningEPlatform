@@ -1,0 +1,20 @@
+package in.na.main.controllers;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+
+import in.na.main.entities.Feedback;
+
+@Controller
+public class FeedbackController {
+	//handler methods
+	
+	@GetMapping("/provideFeedback")
+	public String openProvidedFeedbackPage(Model model) {
+		
+		model.addAttribute("feedback", new Feedback());
+		return "provide-feedback";
+	}
+ 
+}

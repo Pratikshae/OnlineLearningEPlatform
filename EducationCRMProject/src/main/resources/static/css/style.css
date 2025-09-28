@@ -1,0 +1,26 @@
+.sidebar {
+    width: 250px;
+    background-color: black;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    z-index: 1000;   /* ensure it stays above content */
+}
+
+.sidebar .nav-link {
+    color: white;
+}
+.sidebar .nav-link:hover {
+	background-color: #1075e0;
+}
+
+.main-content {
+    margin-left: 250px;
+    width: calc(100% - 250px);
+    padding: 30px;
+    background:#cbdef2;
+    min-height: 100vh;
+    position: relative;
+    z-index: 1;   /* ensure content sits beside, not behind */
+}

@@ -1,0 +1,106 @@
+package in.na.main.controllers;
+import org.springframework.data.domain.Pageable;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import in.na.main.entities.Admin;
+import in.na.main.entities.Feedback;
+import in.na.main.services.FeedbackService;
+
+@Controller
+@SessionAttributes("sessionAdmin")
+public class AdminController {
+
+	// handler method
+	@Autowired
+	private FeedbackService feedbackService;
+
+	@GetMapping("/adminLogin")
+	public String openAdminLoginPage() {
+
+		return "admin-login";
+	}
+
+	@PostMapping("/adminLoginForm")
+	public String adminLoginForm(@RequestParam("adminEmail") String aemail,
+			                     @RequestParam("adminPass") String apass,
+			                     Model model) {
+
+		// logic part
+
+		if (aemail.equals("mayakverar555@gmail.com") && apass.equals("mayak@123")) {
+            Admin admin = new Admin(aemail, "Mayak Verar");
+            
+            model.addAttribute("sessionAdmin", admin);
+			return "redirect:/adminProfile";
+		} else {
+
+			model.addAttribute("errorMsg", "Invalid email or password!!!");
+			return "admin-login";
+		}
+	}
+
+	
+
+	@GetMapping("/adminLogout")
+	public String adminLogout(SessionStatus sessionStatus) {
+		sessionStatus.setComplete();
+		return "admin-login";
+	}
+
+	//----------------------feedback------------------------------------
+	
+	@GetMapping("/adminFeedback")
+	public String openFeedbackPage(Model model,
+			                       @RequestParam(name = "page", defaultValue = "0") int page,
+			                       @RequestParam(name = "size", defaultValue = "4") int size) {
+		
+		
+		Pageable pageable = (Pageable) PageRequest.of(page, size);
+		Page<Feedback> feedbackPage =  feedbackService.getAllFeedbacksByPagination(pageable);
+		
+		model.addAttribute("feedbackPage", feedbackPage);
+		return "view-feedbacks";
+	}
+	
+	@PostMapping("/updateFeedbacksStatus")
+	public String updateFeedbackStatus(@RequestParam("id")Long id,
+			                           @RequestParam("status") String status,
+			                           RedirectAttributes redirectAttributes) {
+		
+	   boolean success =  feedbackService.updateFeedbackStatus(id, status);
+	   if(success) {
+		   redirectAttributes.addFlashAttribute("successMsg", "Feedback updated successfully");
+	   }else {
+		   redirectAttributes.addFlashAttribute("errorMsg", "Failed to update feedback status.");
+	   }
+		return "redirect:/adminFeedback";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+}

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Cancellation Policy Page</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr"
+	crossorigin="anonymous" />
+
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+<link rel="stylesheet" th:href="@{/css/style.css}">
+
+</head>
+<body>
+	<div th:replace="~{fragments/user-header :: u-header}"></div>
+	<h2 class="justify-content-center align-items-center">Cancellation
+		Policy</h2>
+
+	<div class="main-content">
+		<pre class="justify-content-center align-items-center"
+			style="font-size: 20px;">
+		
+			⏳ Cancellation Window: Students can request course cancellation within 7 days of enrollment for a partial refund.
+								
+			💰 Refund Amount: A processing fee of 20% will be deducted, and the remaining amount refunded within 7–10 business days.
+								
+			🚫 Non-Refundable: After 7 days, fees become non-refundable due to resource allocation and faculty scheduling.
+								
+			🔄 Course Transfer: Instead of cancellation, learners may transfer enrollment to another batch/course (subject to availability).
+								
+			📧 Request Process: Cancellation or transfer requests must be submitted via email to support@[InstituteDomain].com with enrollment details.
+		</pre>
+	</div>
+</body>
+</html>

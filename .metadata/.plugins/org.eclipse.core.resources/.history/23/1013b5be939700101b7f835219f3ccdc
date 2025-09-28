@@ -1,0 +1,18 @@
+<!-- fragments/footer.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <body>
+    <footer th:fragment="footer" class="footer bg-dark py-3 text-center">
+      <div class="container">
+        <span class="text-white">@Copyright Prat's Coding</span>
+        <div class="py-3">
+          <a href="/aboutUs" class="ms-3 text-decoration-none">About Us</a>
+          <a href="#" class="ms-3 text-decoration-none">Contact Us</a>
+          <a href="#" class="ms-3 text-decoration-none">Privacy Policy</a>
+          <a href="#" class="ms-3 text-decoration-none">Terms of Services</a>
+          <a href="#" class="ms-3 text-decoration-none">Cancellation Policy</a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

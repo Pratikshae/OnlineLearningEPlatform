@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Add Employee Page</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr"
+	crossorigin="anonymous" />
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" />
+<link rel="stylesheet" th:href="@{/css/style.css}">
+
+</head>
+
+<body>
+	<!--Side navbar starts-->
+	<div th:replace="~{fragments/admin-sidebar :: frag-admin-sidebar}"></div>
+	<!--Side navbar ends -->
+
+	<div class="main-content">
+		<h2 class="text-center mb-3">Course Management</h2>
+		<p class="text-center text-muted">Add new employee here</p>
+
+		<section class="mt-5">
+			<div class="row justify-content-center">
+				<h3 class="text-center mb-4">Add Employee</h3>
+				<div class="card shadow p-5" style="width: 40%">
+
+
+					<!-- Success message -->
+					<div th:if="${successMsg}" class="alert alert-success mb-3"
+						role="alert">
+						<span th:text="${successMsg}"></span>
+					</div>
+					
+					<!-- Error Message -->
+					<div th:if="${errorMsg}" class="alert alert-danger mb-3"
+						role="alert">
+						<span th:text="${errorMsg}"></span>
+					</div>
+
+					<form id="employeeForm" th:action="@{/addEmployeeForm}" th:object="${employee}" method="post">
+
+						<!-- Employee Name -->
+						<div class="mb-3">
+							<label class="form-label fw-semibold">Employee Name</label> 
+							<input type="text" class="form-control" name="employeeName" required />
+							<div class="text-danger small"></div>
+						</div>
+
+						<!-- Employee email Address -->
+						<div class="mb-3">
+							<label class="form-label fw-semibold">Employee email address</label>
+							<input type="email" class="form-control" name="emailId" required />
+							<div class="text-danger small"></div>
+						</div>
+
+						<!-- Password -->
+						<div class="mb-3">
+							<label class="form-label fw-semibold">Password</label> 
+							<input type="password" class="form-control" name="password" required />
+							<div class="text-danger small"></div>
+						</div>
+
+						<!-- Repeat Password -->
+						<div class="mb-3">
+							<label class="form-label fw-semibold">Confirm password</label> 
+							<input type="password" class="form-control" name="repeatPassword" required/> 
+							<div class="text-danger small"></div>
+						</div>
+
+						<!-- Employee phone number -->
+						<div class="mb-3">
+							<label class="form-label fw-semibold">Phone number</label> 
+							<input type="text" class="form-control" name="phoneno" required />
+							<div class="text-danger small"></div>
+						</div>
+
+						<!-- Employee city -->
+						<div class="mb-3">
+							<label class="form-label fw-semibold">City</label>
+							<input type="text" class="form-control" name="city" />
+							<div class="text-danger small"></div>
+						</div>
+
+						<!-- Submit Button -->
+						<div class="d-grid">
+							<button type="submit" class="btn btn-primary btn-lg">Add Employee</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</section>
+	</div>
+
+	<script>
+		
+		document.addEventListener("DOMContentLoaded", function() {
+			
+			const form = document.getElementById("employeeForm");
+			
+			form.addEventListener("submit", function(e) {
+				
+				let isValid = true;
+				//Clear all previous error messages
+				form.querySelectorAll(".text-danger").forEach(div => div.textContent = "");
+				
+				
+				//Employee name
+				const empName = form.employeeName;
+				if(empName.value.trim().length < 3) {
+					setError(empName, "Employee name must be at least 3 characters long.");
+					isValid = false;
+				}
+				
+				//Email Validation check
+				const email = form.emailId;
+				const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+				if(!emailRegex.test(email.value.trim())) {
+					setError(email,"Enter a valid email Address");
+					isValid = false;
+				}
+				
+				//Password validation check
+				const password = form.password;
+				if(password.value.trim().length < 6) {
+					setError(password, "Password must be at least 6 characters long");
+					isValid = false;
+				}
+				
+				//Repeat Password validation check
+				const repeatPassword = form.repeatPassword;
+				if(password.value.trim() !== repeatPassword.value.trim()) {
+					setError(repeatPassword, "Password do not match.");
+					isValid = false;
+				}
+				
+				//Phone number validation check
+				const phno = form.phoneno;
+				const phnoRegex = /^[0-9]{10}$/;
+				if(!phnoRegex.test(phno.value.trim())) {
+					setError(phno, "Phone number must be a valid and 10 digit long");
+					isValid = false;
+				}
+				
+				//City validation check 
+				const city = form.city;
+				if(city.value.trim() === "" || city.value.trim().length < 3) {
+					setError(city, "Enter a valid city name");
+					isValid = false;
+				}
+				
+				if(!isValid) {
+					e.preventDefault();
+				}
+			});
+			
+			//helper function to set Error messages
+			
+			function setError(inputElement, message) {
+				const errorDiv = inputElement.parentElement.querySelector(".text-danger");
+				if(errorDiv) {
+					errorDiv.textContent = message;
+				}
+			}
+		});
+	</script>
+
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
+		crossorigin="anonymous"></script>
+
+</body>
+</html>

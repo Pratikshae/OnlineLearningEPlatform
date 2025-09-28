@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Terms and Services</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr"
+	crossorigin="anonymous" />
+
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+<link rel="stylesheet" th:href="@{/css/style.css}">
+
+</head>
+<body>
+	<div th:replace="~{fragments/user-header :: u-header}"></div>
+	<h2 class="justify-content-center align-items-center">Terms and Services</h2>
+
+	<div class="main-content">
+		<pre class="justify-content-center align-items-center" style="font-size: 20px;">
+
+📚 Course Access: Enrolled learners will receive secure login credentials to access study material, live classes, and recorded sessions. Sharing credentials is strictly prohibited.
+
+💻 Technology Requirement: Students must ensure they have a stable internet connection, a working device, and updated software to participate smoothly.
+
+📅 Class Scheduling: Session timings are pre-scheduled and communicated in advance. Any changes will be notified via email/SMS.
+
+🧑‍🏫 Faculty Support: Our expert trainers provide live interaction, doubt-clearing sessions, and personalized mentoring.
+
+🔐 Data Privacy: Student details are kept secure and used only for academic and administrative purposes.
+
+🎓 Certification: Successful completion of the course (based on attendance, assignments, and assessments) will earn learners a digital certificate recognized by industry partners.
+		   </pre>
+	</div>
+</body>
+</html>

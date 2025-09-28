@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Privacy Policy</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr"
+	crossorigin="anonymous" />
+
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+<link rel="stylesheet" th:href="@{/css/style.css}">
+
+</head>
+<body>
+	<div th:replace="~{fragments/user-header :: u-header}"></div>
+	<h2 class="justify-content-center align-items-center">Privacy
+		Policy</h2>
+
+	<div class="main-content">
+	   <p class="justify-content-center align-items-center" style="">
+	    Welcome to Prat's Coding Training Institute
+		Institute, a trusted platform where knowledge meets innovation and
+		learning transforms into opportunity. Founded with the vision of
+		empowering individuals through accessible and high-quality education,
+		our institute has become a leading destination for students, working
+		professionals, and lifelong learners. At EduGrowth, we believe that
+		education is not just about acquiring knowledge but also about
+		building confidence, enhancing skills, and preparing for the future.
+
+		Our journey began with a simple idea — to bridge the gap between
+		traditional education and the rapidly changing digital world. Today,
+		we proudly offer a wide range of online training programs covering
+		technology, business, data science, digital marketing, languages, and
+		personal development. Each program is carefully designed by industry
+		experts and experienced educators who bring real-world insights into
+		the virtual classroom. With interactive sessions, practical
+		assignments, and personalized mentoring, our learners gain not just
+		theoretical knowledge but also the hands-on skills required in their
+		professional careers. What sets us apart is our student-first
+		approach. We understand that every learner has unique needs, goals,
+		and learning styles. That’s why we offer flexible schedules, recorded
+		sessions, live discussions, and doubt-clearing forums to ensure that
+		no student is left behind. Our advanced learning management system
+		(LMS) allows learners to track progress, access resources anytime, and
+		stay engaged with the community. EduGrowth has trained thousands of
+		students globally, many of whom are now thriving in leading companies,
+		startups, and entrepreneurial ventures. The institute’s commitment to
+		excellence, affordability, and inclusivity makes it an ideal choice
+		for anyone seeking to upgrade skills or start a new career path.
+		Beyond academics, we focus on holistic growth — providing guidance on
+		soft skills, interview preparation, and career counseling. Our mission
+		is simple yet powerful: ✅ To make quality education accessible to
+		everyone, anywhere. ✅ To continuously update and innovate our
+		curriculum to match industry standards. ✅ To build a supportive and
+		inspiring community of learners and mentors. At EduGrowth, we don’t
+		just deliver courses; we shape futures. Whether you’re a beginner
+		taking the first step into a new field or a professional aiming to
+		sharpen your expertise, our institute is here to guide you every step
+		of the way. Together, let’s unlock your potential and create a
+		brighter tomorrow.
+		</p>
+		
+		</div>
+</body>
+</html>

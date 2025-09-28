@@ -1,0 +1,41 @@
+package in.na.main.controllers;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+
+@Controller
+public class SiteInfoController {
+	//handler methods
+	
+	@GetMapping("/aboutUs")
+	public String openAboutUsPage() {
+		return "about-us";
+	}
+	
+	@GetMapping("/contactUs")
+	public String openContactUsPage() {
+		return "contact-us";
+	}
+	
+	@GetMapping("/cancellationPolicy")
+	public String openCancellationPolicyPage() {
+		return "cancellation-policy";
+	}
+	
+	@GetMapping("/termsAndServices")
+	public String openTermsAndServicesPage() {
+		return "terms-and-services";
+	}
+	
+
+	@GetMapping("/privacyPolicy")
+	public String openPrivacyPolicyPage() {
+		return "privacy-policy";
+	}
+	
+	@GetMapping("/onlineBatchesInfo")
+	public String openOnlineBatchesInfoPage() {
+		return "online-batches-info";
+	
+	}
+}

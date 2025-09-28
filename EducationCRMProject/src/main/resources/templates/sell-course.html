@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Sell Course Page</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr"
+	crossorigin="anonymous" />
+
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" />
+
+<link rel="stylesheet" th:href="@{/css/style.css}">
+
+</head>
+
+<body>
+	<!--Side navbar starts-->
+	<div
+		th:replace="~{fragments/employee-sidebar :: frag-employee-sidebar}"></div>
+	<!--Side navbar ends -->
+
+	<div class="main-content">
+		<h2 class="text-center mb-3">Sell course</h2>
+		<p>Provide proper information to sell courses...</p>
+
+		<section class="mt-5">
+			<div class="row justify-content-center">
+				<div class="card shadow p-5" style="width: 40%">
+
+					<div th:if="${successMsg}" class="alert alert-success mb-3"
+						role="alert">
+						<!-- print success message here -->
+						<span th:text="${successMsg}"></span>
+					</div>
+
+					<div th:if="${errorMsg}" class="alert alert-danger mb-3"
+						role="alert">
+						<!-- print error message here -->
+						<span th:text="${errorMsg}"></span>
+					</div>
+
+
+					<form th:action="@{/sellCourseForm}" method="POST"
+						th:object="${orders}">
+						<!-- Courses Name from database -->
+						<div class="mb-3">
+							<label class="form-label fw-semibold">Courses Name</label> <select
+								name="courseName" class="form-select"
+								aria-label="Default select example">
+								<option selected disabled>Select Course</option>
+								<option th:each="courseName: ${courseNameList}"
+									th:value="${courseName}" th:text="${courseName}"></option>
+							</select>
+						</div>
+
+						<!-- Course Price -->
+						<div class="mb-3">
+							<label class="form-label fw-semibold">Course Price</label> <input
+								name="courseAmount" type="text" class="form-control" required />
+						</div>
+
+						<!-- User Email ID -->
+						<div class="mb-3">
+							<label class="form-label fw-semibold">User Email Address</label>
+							<input name="userEmail" type="email" class="form-control"
+								required />
+						</div>
+
+						<!-- Transaction Id-->
+						<div class="mb-3">
+							<label class="form-label fw-semibold">Transaction ID</label> <input
+								name="paymentId" type="text" class="form-control" required />
+						</div>
+
+						<!-- Order ID -->
+						<div class="mb-3">
+							<label class="form-label fw-semibold">Order ID</label> <input
+								name="orderId" type="text" class="form-control"
+								th:value="${uuidOrderId}" readonly />
+						</div>
+
+						<!-- Submit Button -->
+						<div class="d-grid">
+							<button type="submit" class="btn btn-primary btn-lg">Sell
+								Course</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</section>
+	</div>
+
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
+		crossorigin="anonymous"></script>
+
+</body>
+</html>

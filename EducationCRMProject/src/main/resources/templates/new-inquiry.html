@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>New Inquiry Page</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr"
+	crossorigin="anonymous">
+
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+<link rel="stylesheet" th:href="@{/css/style.css}">
+
+</head>
+
+<body>
+	<!--Side navbar starts-->
+	<div
+		th:replace="~{fragments/employee-sidebar :: frag-employee-sidebar}"></div>
+	<!--Side navbar ends -->
+
+	<!-- Employee panel starts -->
+	<div class="main-content">
+		<h2 class="text-center">New Inquiry</h2>
+		<p class="text-center">Provide customer details properly</p>
+
+		<!-- Employee panel ends -->
+		<!-- Main Content starts-->
+		<main class="container-fluid" style="min-height: 600px;">
+
+			<section class="container py-5">
+				<h3 class="text-center">Add New inquiry</h3>
+				<div class="row justify-content-center">
+					<div class="card shadow p-5" style="width: 40%;">
+						<form th:action="@{/submitInquiryForm}" th:object="${inquiry}"
+						method="POST">
+							<div class="mb-3">
+								<label class="form-label">Customer Phone Number:</label> <input
+									name="phoneno" type="text" class="form-control"
+									placeholder="Enter customer phone no." required/>
+							</div>
+							<div class="mb-3">
+								<label class="form-label">Customer Name:</label> <input
+									 name="name" type="text" class="form-control"
+									placeholder="Enter customer name" required/>
+							</div>
+							<div class="mb-3">
+								<label class="form-label">Interested Course:</label> <input
+									name="interestedCourse" type="text" class="form-control"
+									placeholder="Enter interested Course" required/>
+							</div>
+							<div class="mb-3">
+								<label class="form-label">Discussion:</label>
+								<textarea name="discussion" class="form-control" placeholder="Enter discussion"required></textarea>
+							</div>
+							<div class="mb-3">
+								<label class="form-label">Inquiry Type:</label> <select
+									name="inquiryType" class="form-select" required>
+									<option value="" disabled>Inquiry Type:</option>
+									<option value="Call">Call</option>
+									<option value="Mail">Mail</option>
+									<option value="Website">Website</option>
+									<option value="Social Network">Social Network</option>
+									<option value="Friend Reference">Friend Reference</option>
+									<option value="Advertisement">Advertisement</option>
+									<option value="Other">Other</option>
+								</select>
+							</div>
+							<div class="mb-3">
+								<label class="form-label">Call Type:</label> <select
+									name="callType" class="form-select" required>
+									<option value="" disabled>Call Type:</option>
+									<option value="Inbound Call">Inbound Call (customer
+										call to company)</option>
+									<option value="Outbound Call">Outbound Call (company
+										call to customer)</option>
+								</select>
+							</div>
+							<div class="mb-3">
+								<label class="form-label">Status:</label> <select
+									name="status" class="form-select" id="status" onchange="toggleFollowUpdate()" required>
+									<option value="" disabled>Status</option>
+									<option value="Interested - (follow up)">Interested -
+										(follow up)</option>
+									<option value="Interested - (closed)">Interested -
+										(closed)</option>
+									<option value="Not Interested - (closed)">Not
+										Interested - (closed)</option>
+									<option value="Purchased - (closed)">Purchased -
+										(closed)</option>
+									<option value="Others - (closed)">Others - (closed)</option>
+								</select>
+							</div>
+							<div class="mb-3" id="followUpdateDiv">
+								<label class="form-label">Follow Up Date:</label> <input
+									name ="followUpDate" type="date" class="form-control"
+									placeholder="Enter follow up date" />
+							</div>
+							<button type="submit" class="btn btn-primary">Add New Inquiry</button>
+						</form>
+					</div>
+				</div>
+			</section>
+
+		</main>
+		<!-- Main content ends-->
+	</div>
+	<script>
+		function toggleFollowUpdate() {
+
+			var status = document.getElementById('status').value;
+			var followUpdateDiv = document.getElementById('followUpdateDiv');
+
+			if (status === "Interested - (follow up)") {
+
+				followUpdateDiv.style.display = "block";
+			} else {
+
+				followUpdateDiv.style.display = "none";
+			}
+		}
+	</script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
+		crossorigin="anonymous"></script>
+</body>
+
+</html>

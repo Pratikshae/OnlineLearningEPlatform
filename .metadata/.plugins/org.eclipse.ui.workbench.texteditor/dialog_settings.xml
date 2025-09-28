@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<item key="hasShownOverlayPopupBefore" value="true"/>
+	<section name="java.lang.Class">
+		<item key="replaceBarOpen" value="false"/>
+		<list key="findhistory">
+			<item value="add"/>
+			<item value="employee"/>
+			<item value="course"/>
+			<item value="coursesPag"/>
+			<item value="content"/>
+			<item value="ima"/>
+			<item value="imageUrl"/>
+			<item value="${course.imageURL}"/>
+			<item value="image"/>
+			<item value="userProfile"/>
+			<item value="href"/>
+			<item value="index"/>
+		</list>
+	</section>
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
+		<item key="casesensitive" value="false"/>
+		<item key="wholeword" value="false"/>
+		<item key="isRegEx" value="false"/>
+		<item key="selection" value="feedbackModal"/>
+		<list key="findhistory">
+			<item value="feedbackModal"/>
+			<item value=".icon-read"/>
+			<item value="icon re"/>
+			<item value="userPage"/>
+			<item value="green"/>
+			<item value="getDiscussionBtn"/>
+			<item value="#getDisscussionBtn"/>
+			<item value="inquiryDetailsSection"/>
+		</list>
+		<list key="replacehistory">
+		</list>
+	</section>
+	<section name="org.eclipse.ui.texteditor.GotoLineAction$GotoLineDialog_dialogBounds">
+		<item key="DIALOG_X_ORIGIN" value="84"/>
+		<item key="DIALOG_Y_ORIGIN" value="299"/>
+	</section>
+</section>

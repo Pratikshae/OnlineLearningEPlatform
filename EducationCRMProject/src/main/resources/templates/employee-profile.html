@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Employee Profile Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+
+</head>
+
+<body>
+    <!--Side navbar starts-->
+    <div th:replace="~{fragments/employee-sidebar :: frag-employee-sidebar}"></div>
+      <!--Side navbar ends -->
+
+      <!-- Employee panel starts -->
+       <div class="main-content">
+        <h2 th:text="'Welcome : ' +${sessionEmp.employeeName}"></h2>
+        <p>This is employee panel</p>
+      
+      <!-- Employee panel ends -->
+      <!-- Main Content starts-->
+    <main class="container-fluid" style="min-height: 600px;">
+        <section class="container py-5">
+            <!-- Profile designing part -->
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="card shadow"  style="width: 18rem;">
+                        <div class="card-body">
+                            <div class="text-center">
+                                <i class="bi bi-person-circle" style="font-size: 8rem;"></i>
+                                <h3 th:text="${sessionEmp != null ? sessionEmp.employeeName : 'Guest'}"></h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-8">
+                    <div class="card shadow" >
+                        <div class="card-body">
+                            <div class="text-center">
+                                <h4 class="mb-4">Profile Details</h4>
+
+                                <table class="table table-hover table-striped table-bordered">
+                                    
+                                    <tbody>
+                                        <tr>
+                                            <td>Name</td>
+                                            <td th:text="${sessionEmp.employeeName}"></td>
+                                        </tr>
+                                        
+                                        <tr>
+                                            <td>Email</td>
+                                            <td th:text="${sessionEmp.emailId}"></td>
+                                        </tr>
+                                        
+                                        <tr>
+                                            <td>Phone no</td>
+                                            <td th:text="${sessionEmp.phoneno}"></td>
+                                        </tr>
+                                        
+                                        <tr>
+                                            <td>City</td>
+                                            <td th:text="${sessionEmp.city}"></td>
+                                        </tr>
+                                        
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+    <!-- Main content ends-->
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

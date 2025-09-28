@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sales Page</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr"
+	crossorigin="anonymous">
+
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+<link rel="stylesheet" th:href="@{/css/style.css}">
+
+</head>
+
+<body>
+	<!--Side navbar starts-->
+	<div th:replace="~{fragments/admin-sidebar :: frag-admin-sidebar}"></div>
+	<!--Side navbar ends -->
+
+	<!--Sales panel starts -->
+	<div class="main-content">
+		<h2>Sales Information</h2>
+		<p>Below are the details of total sales and individual sales by
+			employee</p>
+
+
+		<section class="mt-5">
+
+			<div class="row justify-content-center">
+
+				<h3 class="text-center mb-4">Sales Information</h3>
+
+				<div class="card shadow p-5" style="width: 80%">
+					<h5 th:text="'Total Sales by all employees: '+${totalSales}+' Rs'"></h5>
+
+					<table class="table table-striped table-hover table-bordered">
+						<thead class="thead-dark">
+							<tr>
+								<th scope="col">Employee Name</th>
+								<th scope="col">Employee EmailId</th>
+								<th scope="col">Employee Phone No.</th>
+								<th scope="col">Total Sales</th>
+
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="list: ${salesList}">
+								<td th:text="${list[0]}"></td>
+								<td th:text="${list[1]}"></td>
+								<td th:text="${list[2]}"></td>
+								<td th:text="'Rs. '+${list[3]}"></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</section>
+	</div>
+	<!--Sales panel ends -->
+
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
+		crossorigin="anonymous"></script>
+</body>
+
+</html>
